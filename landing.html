@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ENVEXA · Plataforma de Logística Internacional</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { darkMode: 'class' };</script>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    }
+    
+    .dark body {
+      background: #0a0f1a;
+      color: #e5e7eb;
+    }
+    
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border: 2px solid transparent;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-8px);
+      border-color: #3b82f6;
+      box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
+    }
+    
+    .dark .card-hover:hover {
+      box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3), 0 10px 10px -5px rgba(59, 130, 246, 0.2);
+    }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .dark .card {
+      background: #0b1220;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    
+    .icon-wrapper {
+      width: 64px;
+      height: 64px;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .icon-blue {
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    }
+    
+    .dark .icon-blue {
+      background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    }
+    
+    .icon-purple {
+      background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+    }
+    
+    .dark .icon-purple {
+      background: linear-gradient(135deg, #5b21b6 0%, #6d28d9 100%);
+    }
+    
+    .icon-green {
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    }
+    
+    .dark .icon-green {
+      background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+    }
+    
+    .icon-orange {
+      background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
+    }
+    
+    .dark .icon-orange {
+      background: linear-gradient(135deg, #c2410c 0%, #ea580c 100%);
+    }
+    
+    .btn {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #e5e7eb;
+      background: white;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .btn:hover {
+      background: #f9fafb;
+    }
+    
+    .dark .btn {
+      background: #0b1220;
+      border-color: #1f2937;
+      color: #e5e7eb;
+    }
+    
+    .dark .btn:hover {
+      background: #111827;
+    }
+    
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    
+    .badge-blue {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+    
+    .dark .badge-blue {
+      background: #1e3a8a;
+      color: #93c5fd;
+    }
+    
+    .badge-purple {
+      background: #ede9fe;
+      color: #6d28d9;
+    }
+    
+    .dark .badge-purple {
+      background: #5b21b6;
+      color: #c4b5fd;
+    }
+    
+    .badge-green {
+      background: #d1fae5;
+      color: #047857;
+    }
+    
+    .dark .badge-green {
+      background: #065f46;
+      color: #6ee7b7;
+    }
+    
+    .badge-orange {
+      background: #fed7aa;
+      color: #c2410c;
+    }
+    
+    .dark .badge-orange {
+      background: #c2410c;
+      color: #fdba74;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-[#0a0f1a] min-h-screen">
+  
+  <!-- Header -->
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-[#0a0f1a]/70 border-b border-gray-200 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img alt="ENVEXA" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF8UlEQVR4nO2dS4hcVRDHf5lEE0VFUVFBRRFBBEVRRFARRRFBUVFEUBRFRRFBUVFEEEVFEUFRFBEURVFEUBRFEUFRFBEUFUVRFBEURVFEUBRFUdT/gVNwmXTf7vv1/X4wcGHuzHT37XOq6tSpU6cSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEIpFIJBKJRCKRSCQSiUQikUgkEolEItGPbABuBw4BXwPfAL8AvwN/A38DfwF/Ar8CvwHfAV8BnwNHgNuADcDaof8PiVZsBe4DPgT+6fnyT/AT8B5wL7C56/8o0Q43Al8Af/d8+ScBx4FXgYuG/m8THbIBeAb4t8fLPwZ8AtwFnD30f52oga3AR8C/PV7+v8DbwOah/+tEA1wMvNvj5f8BHAYuHPq/TjTEeuBF4J+eLv8vwBvAuqH/60TDbAHe7eny/wQ+APYOXQbRE1cDn/Zw+f8AHwJ7hi6D6JmrgM96uPxfgF1Dl0EMxBXAZx1f/s/ArqHLIAbmMuCLDi//d2Dn0GUQNXEp8FmHl/9rYMfQZRA1cjHwaUeX/xuwfegyiJq5CPhfh5f/M3De0GUQDXAh8FVHl/8zcO7QZRA9cQHwdUeX/xNwztBlED1yPvBlR5f/I3D20GUQPXMu8E1Hl/8DcNbQZRADcA7wfYeXv23oMoiBOAv4rqPL/w44Y+gyiAE5E/i2o8v/Fjh96DKIgdkCfNPR5X8NnDZ0GUQD3Ah81dHlfwmcOnQZREPcDHzZ0eV/DpwydBlEg9wCfNHR5X8GbBq6DKJhbgM+7+jyPwU2Dl0G0QK3A591dPmfABuGLoNokTuBTzu6/I+B04YugxiAOwIv/yNg/dBlEC0SePlHgDVDl0G0SODlHwZOGfh/bypKl//m0GXokMLlvz50Gfog/PJfB04c+r9vKgqX/9rQZeiL0Ms/BKwdugxNEXr5rwwdv0+CLv8lYM3Q/3mTBF7+i0P/501TcvkvDF2GPgi7/OeHjt8nQZf/3NBl6JOQy38G2Dx0+L4Iufynhy5DnwRd/lNDx++T0Ms/eeiyNEHI5T8xdBn6JuTynxi6DH0TcvmPD12GPgm5/MeGLsMQhFv+I0OXYQhCLv/hocswFOGW/9DQ8fsm5PIfHLoMQxJu+QeAE4YuwxCEXP79Q8cfgpDL3z90/CEIufx9Q8cfipDL3zv0f98UIZe/Z+jP75OQy989dBmGJOTyHz70f99Unl9+yM/vk5DL3zl0GYYm5PJ3DB1/CEIuf/vQ8Ycg5PK3Dh1/CEIuf8vQZWiCkMvfPHQZmiDk8jcNXYamCLn8jUOXoQnCLX/D0GVoipDL3zB0GZoi3PLXD12Gpgi5/HVDl6FJQi7/lKHL0BQhl7926DI0ScjlnzR0GZok5PJPHLJ+NhJy+WvGvPwYl39y1EvvhgPAyPocfwDvAncB5y1Xt0Iuf83YMQ0l5PJXjH3hPwIfA3cDm+evmXIZp445p97EXP7KeS/4M+Ah4GzKcfHYcxpKyOWvmHfxvwCvADsobzHqpKWsJl5cBq3yFydpXl7+K8BJlCPk8hfnSbySvw+sojyhl796gZJv5O+mHCGXv2qBkm/k76AcIZe/coGSb+TvoByhl79igZJv5G+nHCGXv3qBkm/kb6ccIZe/fIGSb+RvpRxNUVL+OOXfTjmaouTyV4x94cuH/G2UoylKLn/F2BfeANxBOZqi5PLXLVADX5u5vnMb5WiKkstfv0Dt/Mz0fM/1lKMpSi5/wwK19K2526FbKEdTlFz+pgVq7Wfnd0i3Uo6mKLn87QvU5k9N/R6wjXI0Rcnlb1+glv/r1O8DWylHU5Rc/uYp3/qds9DvBVsox//2t0I/++8AAAAASUVORK5CYII=" class="h-10 w-10 rounded-lg">
+        <div>
+          <div class="text-xl font-bold">ENVEXA</div>
+          <div class="text-xs text-gray-500 dark:text-gray-400">Logística Internacional</div>
+        </div>
+      </div>
+      <button id="btnDark" class="btn" title="Modo oscuro">
+        <span id="iconSun" style="display:none;">☀️</span>
+        <span id="iconMoon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-16">
+    
+    <!-- Hero Section -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">
+        Bienvenido a <span class="gradient-text">ENVEXA</span>
+      </h1>
+      <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        Tu plataforma integral para logística internacional. Simplificamos la importación y gestión de envíos.
+      </p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      
+      <!-- Card 1: Calculadora Régimen Simplificado -->
+      <a href="index.html" class="card card-hover cursor-pointer">
+        <div class="icon-wrapper icon-blue">
+          🧮
+        </div>
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="text-xl font-bold">Calculadora Régimen Simplificado</h3>
+          <span class="badge badge-blue">Disponible</span>
+        </div>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          Calcula costos de importación por régimen simplificado. FOB, impuestos, flete aéreo y más.
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+          <span>✓ FOB máx USD 3,000</span>
+          <span>·</span>
+          <span>✓ Exportar PDF</span>
+        </div>
+      </a>
+
+      <!-- Card 2: Calculadora Régimen General -->
+      <div class="card card-hover opacity-60 cursor-not-allowed">
+        <div class="icon-wrapper icon-purple">
+          📋
+        </div>
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="text-xl font-bold">Calculadora Régimen General</h3>
+          <span class="badge badge-purple">Próximamente</span>
+        </div>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          Para importaciones de mayor volumen. Sin límites de FOB, con todos los impuestos y tasas.
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+          <span>✓ Sin límites FOB</span>
+          <span>·</span>
+          <span>✓ Impuestos completos</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Calculadora Pool Importaciones -->
+      <div class="card card-hover opacity-60 cursor-not-allowed">
+        <div class="icon-wrapper icon-green">
+          🏊
+        </div>
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="text-xl font-bold">Calculadora Pool Importaciones</h3>
+          <span class="badge badge-green">Próximamente</span>
+        </div>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          Agrupa múltiples pedidos en un solo envío. Optimiza costos compartiendo gastos fijos.
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+          <span>✓ Envíos grupales</span>
+          <span>·</span>
+          <span>✓ Ahorro de costos</span>
+        </div>
+      </div>
+
+      <!-- Card 4: Clasificaciones Productos -->
+      <div class="card card-hover opacity-60 cursor-not-allowed">
+        <div class="icon-wrapper icon-orange">
+          🏷️
+        </div>
+        <div class="flex items-start justify-between mb-3">
+          <h3 class="text-xl font-bold">Clasificaciones Productos</h3>
+          <span class="badge badge-orange">Próximamente</span>
+        </div>
+        <p class="text-gray-600 dark:text-gray-400 mb-4">
+          Base de datos de códigos arancelarios (HS Code) e impuestos aplicables por producto.
+        </p>
+        <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500">
+          <span>✓ HS Codes</span>
+          <span>·</span>
+          <span>✓ Impuestos por producto</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Features Section -->
+    <div class="mt-24 text-center">
+      <h2 class="text-2xl font-bold mb-8">¿Por qué elegir ENVEXA?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        
+        <div class="p-6">
+          <div class="text-4xl mb-4">⚡</div>
+          <h3 class="font-bold mb-2">Rápido y Eficiente</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Procesa tus cotizaciones en segundos
+          </p>
+        </div>
+
+        <div class="p-6">
+          <div class="text-4xl mb-4">🔒</div>
+          <h3 class="font-bold mb-2">Seguro y Confiable</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Tus datos protegidos con encriptación
+          </p>
+        </div>
+
+        <div class="p-6">
+          <div class="text-4xl mb-4">🌍</div>
+          <h3 class="font-bold mb-2">Global</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400">
+            Importaciones desde cualquier origen
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-24 py-8 border-t border-gray-200 dark:border-gray-800">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm text-gray-500 dark:text-gray-400">
+      <div class="font-semibold mb-2">ENVEXA</div>
+      <div>Plataforma de Logística Internacional · 2026</div>
+    </div>
+  </footer>
+
+  <script>
+    // Dark Mode Toggle
+    (function(){
+      const root = document.documentElement;
+      const saved = localStorage.getItem("envexa-dark");
+      if(saved === "1") { 
+        root.classList.add("dark"); 
+        document.getElementById("iconSun").style.display="inline"; 
+        document.getElementById("iconMoon").style.display="none"; 
+      }
+      document.getElementById("btnDark").addEventListener("click", ()=>{
+        const isDark = root.classList.toggle("dark");
+        localStorage.setItem("envexa-dark", isDark ? "1":"0");
+        document.getElementById("iconSun").style.display = isDark ? "inline" : "none";
+        document.getElementById("iconMoon").style.display = isDark ? "none" : "inline";
+      });
+    })();
+  </script>
+
+</body>
+</html>
